@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+    <include file="$(find mavros)/launch/gazebo.launch" />
+
     <include file="$(find temporal_octomap)/launch/temporal_octomap.launch"/>
     <include file="$(find yolov5_stereo)/launch/yolov5_stereo.launch"/>
-    <include file="$(find mavros)/launch/gazebo.launch" />
+    <!-- <include file="$(find landing_commander)/launch/landing_commander.launch" /> -->
 </launch>
