@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/tilemahos/uav_pipeline/devel/include/**",
+        "/home/tilemahos/uav_pipeline/src/safety_pipeline/landing_commander/include/**",
+        "/home/tilemahos/uav_pipeline/src/mavros/libmavconn/include/**",
+        "/home/tilemahos/uav_pipeline/src/mavros/mavros/include/**",
+        "/home/tilemahos/uav_pipeline/src/mavros/mavros_msgs/include/**",
+        "/home/tilemahos/uav_pipeline/src/octomap/octomap/include/**",
+        "/home/tilemahos/uav_pipeline/src/octomap_msgs/include/**",
+        "/home/tilemahos/uav_pipeline/src/octomap_ros/include/**",
+        "/home/tilemahos/uav_pipeline/src/safety_pipeline/temporal_octomap/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
