@@ -2,10 +2,6 @@
 <launch>
     <include file="$(find mavros)/launch/gazebo.launch" />
 
-    <include file="$(find temporal_octomap)/launch/temporal_octomap.launch"/>
-    <include file="$(find yolov5_stereo)/launch/yolov5_stereo.launch"/>
-    <include file="$(find landing_commander)/launch/landing_commander.launch" />
-
     <node name="rviz_voxels" pkg="rviz" type="rviz" output="screen" args="-d $(find yolov5_stereo)/rviz/Safety_Pipeline.rviz" />
     <node name="rviz_gridmap0" pkg="rviz" type="rviz" output="screen" args="-d $(find yolov5_stereo)/rviz/Occupancy_Grid.rviz" />
     <node name="rviz_gridmap1" pkg="rviz" type="rviz" output="screen" args="-d $(find yolov5_stereo)/rviz/Occupancy_Grid_Output.rviz" />
