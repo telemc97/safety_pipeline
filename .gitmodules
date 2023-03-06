@@ -7,3 +7,6 @@
 [submodule "landing_commander"]
 	path = landing_commander
 	url = https://github.com/telemc97/landing_commander.git
+[submodule "multicriteria_safety_distance"]
+	path = multicriteria_safety_distance
+	url = https://github.com/telemc97/multicriteria_safety_distance.git
