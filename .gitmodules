@@ -1,9 +1,9 @@
-[submodule "yolov5_stereo"]
-	path = yolov5_stereo
-	url = https://github.com/telemc97/yolov5_stereo.git
 [submodule "temporal_octomap"]
 	path = temporal_octomap
 	url = https://github.com/telemc97/temporal_octomap.git
 [submodule "landing_commander"]
 	path = landing_commander
 	url = https://github.com/telemc97/landing_commander.git
+[submodule "yolo_pointcloud"]
+	path = yolo_pointcloud
+	url = https://github.com/telemc97/yolo_pointcloud.git
