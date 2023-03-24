@@ -71,7 +71,7 @@
 	</node>
 
     <!-- YOLO Object Detector Point Cloud Detector -->
-    <arg name="weights"                            default="$(find yolov5_stereo)/weights/yolov7_okutama.pt"/>
+    <arg name="weights"                            default="$(find yolo_pointcloud)/weights/yolov8m.pt"/>
     <arg name="confidence"                         default="0.7"/>
     <arg name="max_detections"                     default="10"/>
     <arg name="agnostic_nms"                       default="True"/>
@@ -89,10 +89,11 @@
     <arg name="camera1_topic"                      default="/stereo/right/image_raw"/>
     <arg name="camera1_info_topic"                 default="/stereo/right/camera_info"/>
 
-    <arg name="publish_image_topic0"               default="/yolov5/camera0/detection_image"/>
-    <arg name="detected_objects_topic0"            default="/yolov5/camera0/detected_objects"/>
+    <arg name="publish_image_topic0"               default="/yolo_pointcloud/camera0/detection_image"/>
+    <arg name="detected_objects_topic0"            default="/yolo_pointcloud/camera0/detected_objects"/>
 
-    <node name="detector" pkg="yolov5_stereo" type="yolov5_node.py" output="screen" respawn="true">
+    <!-- Node -->
+    <node name="detector" pkg="yolo_pointcloud" type="yolo_pointcloud_node.py" output="screen" respawn="true">
         <param name="confidence"                    value="$(arg confidence)"/>
         <param name="iou_thresh"                    value="$(arg iou_thresh)"/>
         <param name="agnostic_nms"                  value="$(arg agnostic_nms)"/>
