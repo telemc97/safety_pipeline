@@ -1,6 +1,3 @@
-[submodule "yolov5_stereo"]
-	path = yolov5_stereo
-	url = https://github.com/telemc97/yolov5_stereo.git
 [submodule "temporal_octomap"]
 	path = temporal_octomap
 	url = https://github.com/telemc97/temporal_octomap.git
@@ -10,3 +7,6 @@
 [submodule "multicriteria_safety_distance"]
 	path = multicriteria_safety_distance
 	url = https://github.com/telemc97/multicriteria_safety_distance.git
+[submodule "yolo_pointcloud"]
+	path = yolo_pointcloud
+	url = https://github.com/telemc97/yolo_pointcloud.git
