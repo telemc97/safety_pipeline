@@ -2,7 +2,7 @@
 <launch>
     <include file="$(find mavros)/launch/gazebo.launch" />
 
-    <node name="rviz_voxels" pkg="rviz" type="rviz" output="screen" args="-d $(find yolov5_stereo)/rviz/Safety_Pipeline.rviz" />
+    <node name="rviz_voxels" pkg="rviz" type="rviz" output="screen" args="-d $(find yolo_pointcloud)/rviz/Safety_Pipeline.rviz" />
     <node name="rviz_gridmap0" pkg="rviz" type="rviz" output="screen" args="-d $(find safety_pipeline)/rviz/Occupancy_Grid.rviz" />
     <node name="rviz_gridmap1" pkg="rviz" type="rviz" output="screen" args="-d $(find safety_pipeline)/rviz/Occupancy_Grid_Output.rviz" />
 </launch>

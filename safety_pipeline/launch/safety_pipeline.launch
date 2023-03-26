@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <include file="$(find mavros)/launch/gazebo.launch" />
-
+    <!-- <include file="$(find mavros)/launch/gazebo.launch" /> -->
     <!-- Landing Commander -->
     <arg name="safety_dist"                            	default="2.0"/>
     <arg name="safety_area"                            	default="safety_area"/>
@@ -71,7 +70,7 @@
 	</node>
 
     <!-- YOLO Object Detector Point Cloud Detector -->
-    <arg name="weights"                            default="$(find yolov5_stereo)/weights/yolov7_okutama.pt"/>
+    <arg name="weights"                            default="$(find yolo_pointcloud)/weights/yolov8m.pt"/>
     <arg name="confidence"                         default="0.7"/>
     <arg name="max_detections"                     default="10"/>
     <arg name="agnostic_nms"                       default="True"/>
@@ -89,10 +88,11 @@
     <arg name="camera1_topic"                      default="/stereo/right/image_raw"/>
     <arg name="camera1_info_topic"                 default="/stereo/right/camera_info"/>
 
-    <arg name="publish_image_topic0"               default="/yolov5/camera0/detection_image"/>
-    <arg name="detected_objects_topic0"            default="/yolov5/camera0/detected_objects"/>
+    <arg name="publish_image_topic0"               default="/yolo_pointcloud/camera0/detection_image"/>
+    <arg name="detected_objects_topic0"            default="/yolo_pointcloud/camera0/detected_objects"/>
 
-    <node name="detector" pkg="yolov5_stereo" type="yolov5_node.py" output="screen" respawn="true">
+    <!-- Node -->
+    <node name="detector" pkg="yolo_pointcloud" type="yolo_pointcloud_node.py" output="screen" respawn="true">
         <param name="confidence"                    value="$(arg confidence)"/>
         <param name="iou_thresh"                    value="$(arg iou_thresh)"/>
         <param name="agnostic_nms"                  value="$(arg agnostic_nms)"/>
@@ -110,5 +110,23 @@
         <param name="camera1_topic"                 value="$(arg camera1_topic)"/>
         <param name="matching_distance_coefficient" value="$(arg matching_distance_coefficient)"/>
     </node>
-    
+
+
+    <arg name="detections_sum_weight"                            default="0.4"/>
+    <arg name="average_confidence_weight"                        default="0.5"/>
+    <arg name="average_slope_weight"                             default="0.3"/>
+    <arg name="average_density"                                  default="0.5"/>
+    <arg name="comparison_resolution"                            default="100"/>
+    <arg name="multisample_resolution"                           default="2"/>
+
+    <node name="multicriteria_safety_distance" pkg="multicriteria_safety_distance" type="main_node.py" output="screen" respawn="true">
+        <param name="detections_sum_weight"                      value="$(arg detections_sum_weight)"/>
+        <param name="average_confidence_weight"                  value="$(arg average_confidence_weight)"/>
+        <param name="average_slope_weight"                       value="$(arg average_slope_weight)"/>
+        <param name="average_density"                            value="$(arg average_density)"/>
+        <param name="comparison_resolution"                      value="$(arg comparison_resolution)"/>
+        <param name="multisample_resolution"                     value="$(arg multisample_resolution)"/>
+        <remap from="/projected_map_with_safety_dist"                         to="/map_input"/>
+    </node>
+
 </launch>
