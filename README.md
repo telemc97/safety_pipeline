@@ -1,5 +1,7 @@
 # UAV Landing Safety Pipeline
 
+A Lightweight Pipeline for landing obstacles avoidance and safe landing zone extraction
+
 <img src="images/GitHub.png" alt="Pipeline Arch" style="height: 229px; width:550px;"/>
 
 In this repository you can find our proposed pipeline for safe landing areas. It is implemented in ROS.
