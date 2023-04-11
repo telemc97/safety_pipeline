@@ -66,11 +66,11 @@
 		<param name="latch"                   			value="$(arg latch)"/>
 		<param name="decaytime/sec"                   	value="$(arg decaytime/sec)"/>
 		<param name="decaytime/nsec"                   	value="$(arg decaytime/nsec)"/>
-
+        <!-- <remap from="/projected_map"                    to="/map_input"/> -->
 	</node>
 
     <!-- YOLO Object Detector Point Cloud Detector -->
-    <arg name="weights"                            default="$(find yolo_pointcloud)/weights/yolov8m.pt"/>
+    <arg name="weights"                            default="$(find yolo_pointcloud)/weights/yolov8n.pt"/>
     <arg name="confidence"                         default="0.7"/>
     <arg name="max_detections"                     default="10"/>
     <arg name="agnostic_nms"                       default="True"/>

@@ -1,18 +1,20 @@
 # UAV Landing Safety Pipeline
+A Lightweight Pipeline for landing obstacles avoidance and safe landing zone extraction
 
 <img src="images/GitHub.png" alt="Pipeline Arch" style="height: 229px; width:550px;"/>
 
 In this repository you can find our proposed pipeline for safe landing areas. It is implemented in ROS.
 
-The pipeline is consisted of three submodules:
+The pipeline is consisted of four submodules:
 
 <ul>
   <li>Point Cloud Generator</li>
   <li>Temporal Octomap</li>
+  <li>Multicriteria Safety Distance</li>
   <li>Landing Commander</li>
 </ul>
 
-<img src="images/pipeline_arch.png" alt="Pipeline Arch" style="height: 229px; width:550px;"/>
+<img src="images/pipeline_arch.png" alt="Pipeline Arch" style="height: 341px; width:472px;"/>
 
 ## __Point Cloud Generator__
 The backbone of this submodule is the object detector. In that case we use the YOLO v7. A pair of stereo images is collected and then feeded to the object detector. The centers of the detections' bounding boxes are matched and then triangulated to produce a point cloud (ROS pointcloud2 msg) consisting only of the network's detections.
@@ -28,9 +30,10 @@ The backbone of this submodule is the object detector. In that case we use the Y
 ### Publishing Topics
 <ul>
   <li><code>/PointCloud</code></li>
-  <li><code>/detector/detected_objects</code></li>
-  <li><code>/detector/detection_image</code></li>
-  <li><code>/detector_debug</code></li>
+  <li><code>/yolo_pointcloud/detected_objects</code></li>
+  <li><code>/yolo_pointcloud/detection_image</code></li>
+  <li><code>/yolo_pointcloud/point_with_confidence</code></li>
+  <li><code>/yolo_pointcloud_stereo_debug</code></li>
 </ul>
 
 ### Parameters
@@ -82,6 +85,39 @@ This submodule has as its input the <code>pointcloud2</code> msg from the Point 
   <li><code>~decaytime/sec</code></li>
   <li><code>~decaytime/nsec</code></li>
 </ul>
+
+## __Multicriteria Safety Distance__
+This modules recieves 2 messages as input. The Detections' Points along with their confidence as well as the occupancy grid produced by the Temporal Octomap Module. Collecting various data for each cell of the occupancy grid (i.e detections sum, average confidence, average gradient, and detections' density), it uses a weighted sum model to determine the safety radius for each occupied cell in the occupancy grid.
+
+### Subscribing Topics
+<ul>
+  <li><code>/yolov5/point_with_confidence</code></li>
+  <li><code>/projected_map</code></li>
+</ul>
+
+### Publishing Topics
+<ul>
+  <li><code>/projected_map_with_safety_dist</code></li>
+</ul>
+
+### Parameters
+<ul>
+  <li><code>~res</code></li>
+  Resolution of the occupancy grid (ressolution of the whole pipeline)
+  <li><code>~min_safety_radius</code></li>
+  Minimum safety radius.
+  <li><code>~max_safety_radius</code></li>
+  Maximum safety radius.
+  <li><code>~multisample_resolution</code></li>
+  Resolution for calculating the density and gradient of detections.
+  <li><code>~detections_weight</code></li>
+  Weight for the sum of detections
+  <li><code>~average_slope_weight</code></li>
+  Weight for the gradient of detections.
+  <li><code>~average_density</code></li>
+  Weight for the density of the detections.
+</ul>
+
 
 ## __Landing Commander__
 This is the last module of the pipeline and it handles the safe landing points extraction and the landing procedure itself. The latter is base on the PX4 Autopilot software.
