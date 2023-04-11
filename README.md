@@ -91,7 +91,7 @@ This modules recieves 2 messages as input. The Detections' Points along with the
 
 ### Subscribing Topics
 <ul>
-  <li><code>/yolov5/point_with_confidence</code></li>
+  <li><code>/yolo_pointcloud/point_with_confidence</code></li>
   <li><code>/projected_map</code></li>
 </ul>
 
@@ -109,7 +109,7 @@ This modules recieves 2 messages as input. The Detections' Points along with the
   <li><code>~max_safety_radius</code></li>
   Maximum safety radius.
   <li><code>~multisample_resolution</code></li>
-  Resolution for calculating the density and gradient of detections.
+  Resolution for calculating the density and gradient of detections (<code>~res</code> x <code>~res</code>).
   <li><code>~detections_weight</code></li>
   Weight for the sum of detections
   <li><code>~average_slope_weight</code></li>
