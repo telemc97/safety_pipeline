@@ -127,7 +127,7 @@
     </node>
     <remap from="/point_with_confidence"                         to="/map_input"/>
 
-    <node name="rviz_voxels" pkg="rviz" type="rviz" output="screen" args="-d $(find yolo_pointcloud)/rviz/Safety_Pipeline.rviz" />
+    <node name="rviz_voxels" pkg="rviz" type="rviz" output="screen" args="-d $(find yolo_pointcloud)/rviz/yolo_pointcloud.rviz" />
     <node name="rviz_gridmap0" pkg="rviz" type="rviz" output="screen" args="-d $(find safety_pipeline)/rviz/Occupancy_Grid.rviz" />
     <node name="rviz_gridmap1" pkg="rviz" type="rviz" output="screen" args="-d $(find safety_pipeline)/rviz/Occupancy_Grid_Output.rviz" />
 
